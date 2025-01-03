@@ -1,7 +1,7 @@
 ---
 import AnmeldelsesCard from "../components/AnmeldelsesCard.astro";
 ---
-
+<!-- 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
   let currentIndex = 0;
@@ -14,7 +14,7 @@ import AnmeldelsesCard from "../components/AnmeldelsesCard.astro";
   // Funktion til at opdatere antallet af kort, der skal flyttes
   function getSlideWidth() {
     // Flyt 2 kort ad gangen på md skærmstørrelse (768px til 1023px)
-    if (window.innerWidth >= 768 && window.innerWidth < 1024) {
+    if (window.innerWidth >= 1024 && window.innerWidth < 1050) {
       return cardWidth * 2; // Flyt 2 kort ad gangen på md
     } else {
       return cardWidth; // Flyt 1 kort ad gangen på xs, sm, lg, xl og 2xl
@@ -47,6 +47,52 @@ import AnmeldelsesCard from "../components/AnmeldelsesCard.astro";
 });
 
 </script>
+ -->
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let currentIndex = 0;
+    const cardsContainer = document.querySelector('.cards-container');
+    const cardItems = document.querySelectorAll('.card-item');
+
+    // Beregn bredden af et kort dynamisk
+    const cardWidth = cardItems[0].offsetWidth;
+
+    // Funktion til at opdatere antallet af kort, der skal flyttes
+    function getSlideWidth() {
+      return cardWidth; // Flyt kun 1 kort ad gangen uanset skærmstørrelse
+    }
+
+    // Beregn det totale antal kort
+    const totalCards = cardItems.length;
+
+    // Funktion til at opdatere transformeringen af kortene
+    function updateCardPosition() {
+      const slideWidth = getSlideWidth(); // Brug den dynamiske slideWidth
+      cardsContainer.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+
+    // Navigationsknap til venstre
+    document.querySelector('.prev-button').addEventListener('click', function () {
+      currentIndex = (currentIndex === 0) ? totalCards - 1 : currentIndex - 1;
+      updateCardPosition();
+    });
+
+    // Navigationsknap til højre
+    document.querySelector('.next-button').addEventListener('click', function () {
+      currentIndex = (currentIndex + 1) % totalCards;
+      updateCardPosition();
+    });
+
+    // Opdater kortposition, hvis vinduet ændrer størrelse
+    window.addEventListener('resize', updateCardPosition);
+  });
+</script>
+
+
+
+
+
+
 
 <div id="anmeld" class="bg-primary-500 pt-xl py-lg px-ml lg:p-2xl">
   <div id="sektion4" class="opacity-0">
