@@ -3,7 +3,8 @@ const { img, name, description, beer } = Astro.props;
 ---
 
 <div class="px-2">
-  <div class="bg-accent-500 pb-2xl">
+  <div class="bg-accent-500 pb-2xl w-[80%] mx-auto md:w-[80%] lg:w-[100%] rounded-sm">
+
     <div class="flex flex-col items-center max-w-[284px] lg:max-w-[600px] mx-auto p-sm pb-xs h-[300px] relative">
       <!-- IMG centered -->
       <img src={img} alt="Ølentusiast" class="h-40 w-240 rounded-sm mx-auto mt-sm" />
